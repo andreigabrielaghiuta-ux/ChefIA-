@@ -2,7 +2,7 @@ package backend.entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
-
+import org.hibernate.annotations.CreationTimestamp;
 @Entity
 @Table(name = "usuarios")
 
@@ -16,19 +16,19 @@ public class Usuario {
     private String email;
     @Column(name = "password_usuario", nullable = false, length = 255)
     private String passwordHash;
-    @Column(name = "fecha_registro", nullable = false)
-    private LocalDateTime fechaRegistro;
+    @CreationTimestamp
+    @Column(name = "fecha_registro",nullable = false,updatable = false)
+    private LocalDateTime fechaRegistro; 
 
     // ---CONSTRUCTORES--- //
 
     public Usuario() {
     }
 
-    public Usuario(String nombre, String email, String passwordHash, LocalDateTime fechaRegistro) {
+    public Usuario(String nombre, String email, String passwordHash) {
         this.nombre = nombre;
         this.email = email;
         this.passwordHash = passwordHash;
-        this.fechaRegistro = LocalDateTime.now();
     }
 
     // ---GETTERS--- //
