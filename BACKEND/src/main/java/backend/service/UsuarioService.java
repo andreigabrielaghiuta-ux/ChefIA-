@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import backend.dto.UsuarioRegistroDTO;
 import backend.dto.UsuarioRespuestaDTO;
 import backend.entity.Usuario;
+import backend.exception.EmailYaRegistradoException;
 import backend.repository.UsuarioRepository;
 
 import java.util.Locale;
@@ -23,7 +24,7 @@ public class UsuarioService {
         String nombre = dto.getNombre().trim();
         String email = dto.getEmail().trim().toLowerCase(Locale.ROOT);
         if(usuarioRepository.existsByEmail(email)){
-            throw new IllegalArgumentException("Este email ya existe");
+            throw new EmailYaRegistradoException(email);
         }
 
 
