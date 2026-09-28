@@ -3,9 +3,11 @@ package backend.service;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import backend.dto.UsuarioLoginDTO;
 import backend.dto.UsuarioRegistroDTO;
 import backend.dto.UsuarioRespuestaDTO;
 import backend.entity.Usuario;
+import backend.exception.CredencialesInvalidasException;
 import backend.exception.EmailYaRegistradoException;
 import backend.repository.UsuarioRepository;
 
@@ -39,5 +41,17 @@ public class UsuarioService {
 
 
         return new UsuarioRespuestaDTO(usuarioGuardado.getId(), usuarioGuardado.getNombre(), usuarioGuardado.getEmail(), usuarioGuardado.getFechaRegistro());
+    }
+    public Usuario autenticar(UsuarioLoginDTO dto){
+        String email = dto.getEmail().trim().toLowerCase(Locale.ROOT);
+        String password = dto.getPassword();
+        Usuario usuario = usuarioRepository.findByEmail(email).orElseThrow(() -> new CredencialesInvalidasException());
+        boolean passwordCoincide = passwordEncoder.matches(password, usuario.getPasswordHash());
+        
+        if(!passwordCoincide){
+            throw new CredencialesInvalidasException();
+        }else{
+           return usuario;
+        }
     }
 }
