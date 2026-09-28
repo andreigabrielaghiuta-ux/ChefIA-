@@ -34,5 +34,9 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(CredencialesInvalidasException.class)
     public ResponseEntity<String> manejarCredencialesInvalidasException(CredencialesInvalidasException ex){
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ex.getMessage());
-    }  
+    }
+    @ExceptionHandler(PerfilNoEncontradoException.class)
+    public ResponseEntity<String> manejarPerfilNoEncontradoException(PerfilNoEncontradoException ex){
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+    }    
 }

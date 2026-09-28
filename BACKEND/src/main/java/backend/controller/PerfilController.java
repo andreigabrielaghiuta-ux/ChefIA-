@@ -1,6 +1,7 @@
 package backend.controller;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,5 +30,10 @@ public class PerfilController {
     public PerfilRespuestaDTO crearPerfil(@AuthenticationPrincipal Jwt jwt,@Valid @RequestBody PerfilRegistroDTO dto) {
     Long usuarioId = Long.valueOf(jwt.getSubject());
     return perfilService.crearPerfil(usuarioId, dto);
-}
+    }
+    @GetMapping("/perfil")
+    public PerfilRespuestaDTO obtenerPerfilActual(@AuthenticationPrincipal Jwt jwt) {
+    Long usuarioId = Long.valueOf(jwt.getSubject());    
+    return perfilService.obtenerPerfil(usuarioId);
+    }
 }
