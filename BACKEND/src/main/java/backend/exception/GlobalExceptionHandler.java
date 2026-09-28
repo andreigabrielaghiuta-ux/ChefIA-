@@ -17,10 +17,18 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
     }
 
-@ExceptionHandler(MethodArgumentNotValidException.class)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, String>> manejarValidaciones(MethodArgumentNotValidException ex) {
         Map<String, String> errores = new HashMap<>();
         ex.getBindingResult().getFieldErrors().forEach(error -> errores.put(error.getField(), error.getDefaultMessage()));
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errores);
     }
+    @ExceptionHandler(PerfilYaExisteException.class)
+    public ResponseEntity<String> manejarPerfilYaExisteException(PerfilYaExisteException ex){
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
+    }
+    @ExceptionHandler(UsuarioNoEncontradoException.class)
+    public ResponseEntity<String> manejarUsuarioNoEncontradoException(UsuarioNoEncontradoException ex){
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+    }       
 }

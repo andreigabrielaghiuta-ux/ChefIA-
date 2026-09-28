@@ -22,15 +22,14 @@ public class PerfilRespuestaDTO {
     public PerfilRespuestaDTO() {
     }
 
-    public PerfilRespuestaDTO(Long id, Integer altura, BigDecimal peso, Actividad nivelActividad, Sexo sexo,
-            Objetivo objetivo, LocalDate fechaNacimiento) {
+    public PerfilRespuestaDTO(Long id, Integer altura, BigDecimal peso,LocalDate fechaNacimiento, Actividad nivelActividad, Sexo sexo, Objetivo objetivo) {
         this.id = id;
         this.altura = altura;
         this.peso = peso;
+        this.fechaNacimiento = fechaNacimiento;
         this.nivelActividad = nivelActividad;
         this.sexo = sexo;
         this.objetivo = objetivo;
-        this.fechaNacimiento = fechaNacimiento;
     }
 
     // ---GETTERS--- //
