@@ -9,6 +9,7 @@ import backend.dto.UsuarioRespuestaDTO;
 import backend.entity.Usuario;
 import backend.exception.CredencialesInvalidasException;
 import backend.exception.EmailYaRegistradoException;
+import backend.exception.UsuarioNoEncontradoException;
 import backend.repository.UsuarioRepository;
 
 import java.util.Locale;
@@ -53,5 +54,9 @@ public class UsuarioService {
         }else{
            return usuario;
         }
+    }
+    public UsuarioRespuestaDTO obtenerUsuario(Long usuarioId){
+        Usuario usuario = usuarioRepository.findById(usuarioId).orElseThrow(() -> new UsuarioNoEncontradoException(usuarioId));
+        return  new UsuarioRespuestaDTO(usuario.getId(), usuario.getNombre(), usuario.getEmail(), usuario.getFechaRegistro());
     }
 }

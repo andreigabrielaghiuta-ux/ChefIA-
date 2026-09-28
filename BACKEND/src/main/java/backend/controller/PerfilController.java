@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
 
 import backend.dto.PerfilRegistroDTO;
 import backend.dto.PerfilRespuestaDTO;
@@ -23,10 +25,10 @@ public class PerfilController {
         this.perfilService = perfilService;  
     }
 
-    @PostMapping("/{usuarioId}/perfil")
+    @PostMapping("/perfil")
     @ResponseStatus(HttpStatus.CREATED)
-    public PerfilRespuestaDTO crearPerfil(@PathVariable Long usuarioId, @Valid @RequestBody PerfilRegistroDTO  dto) {
-
-        return perfilService.crearPerfil(usuarioId, dto);
-    }
+    public PerfilRespuestaDTO crearPerfil(@AuthenticationPrincipal Jwt jwt,@Valid @RequestBody PerfilRegistroDTO dto) {
+    Long usuarioId = Long.valueOf(jwt.getSubject());
+    return perfilService.crearPerfil(usuarioId, dto);
+}
 }
