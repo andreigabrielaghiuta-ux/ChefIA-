@@ -23,13 +23,14 @@ public class PerfilRespuestaDTO {
     }
 
     public PerfilRespuestaDTO(Long id, Integer altura, BigDecimal peso, Actividad nivelActividad, Sexo sexo,
-            Objetivo objetivo) {
+            Objetivo objetivo, LocalDate fechaNacimiento) {
         this.id = id;
         this.altura = altura;
         this.peso = peso;
         this.nivelActividad = nivelActividad;
         this.sexo = sexo;
         this.objetivo = objetivo;
+        this.fechaNacimiento = fechaNacimiento;
     }
 
     // ---GETTERS--- //
@@ -58,6 +59,10 @@ public class PerfilRespuestaDTO {
         return objetivo;
     }
 
+    public LocalDate getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
     // ---SETTERS--- //
 
     public void setAltura(Integer altura) {
@@ -75,4 +80,5 @@ public class PerfilRespuestaDTO {
     public void setObjetivo(Objetivo objetivo) {
         this.objetivo = objetivo;
     }
+
 }

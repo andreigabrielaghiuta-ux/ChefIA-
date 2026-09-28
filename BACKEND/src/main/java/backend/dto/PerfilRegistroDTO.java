@@ -43,12 +43,13 @@ public class PerfilRegistroDTO {
     public PerfilRegistroDTO() {
     }
 
-    public PerfilRegistroDTO(Integer altura, BigDecimal peso, Actividad nivelActividad, Sexo sexo, Objetivo objetivo) {
+    public PerfilRegistroDTO(Integer altura, BigDecimal peso, Actividad nivelActividad, Sexo sexo, Objetivo objetivo, LocalDate fechaNacimiento) {
         this.altura = altura;
         this.peso = peso;
         this.nivelActividad = nivelActividad;
         this.sexo = sexo;
         this.objetivo = objetivo;
+        this.fechaNacimiento = fechaNacimiento;
     }
 
     // ---GETTERS--- //
@@ -73,6 +74,10 @@ public class PerfilRegistroDTO {
         return objetivo;
     }
 
+    public LocalDate getFechaNacimiento(){
+        return fechaNacimiento;
+    }
+
     // ---SETTERS--- //
 
     public void setAltura(Integer altura) {
@@ -89,5 +94,9 @@ public class PerfilRegistroDTO {
 
     public void setObjetivo(Objetivo objetivo) {
         this.objetivo = objetivo;
+    }
+    
+    public void setFechaNacimiento(LocalDate fechaNacimiento){
+        this.fechaNacimiento = fechaNacimiento;
     }
 }
