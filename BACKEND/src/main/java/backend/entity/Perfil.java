@@ -114,6 +114,14 @@ public class Perfil {
     public void setObjetivo(Objetivo objetivo) {
         this.objetivo = objetivo;
     }
+    
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public void setSexo(Sexo sexo) {
+        this.sexo = sexo;
+    }
 
     public void agregarAlergia(Alergia alergia) {
         this.alergias.add(alergia);
