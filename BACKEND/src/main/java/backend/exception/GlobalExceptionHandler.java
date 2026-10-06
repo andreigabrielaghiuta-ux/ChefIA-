@@ -38,5 +38,9 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(PerfilNoEncontradoException.class)
     public ResponseEntity<String> manejarPerfilNoEncontradoException(PerfilNoEncontradoException ex){
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
-    }    
+    }
+    @ExceptionHandler(AlergiaNoEncontradaException.class)
+    public ResponseEntity<String> manejarAlergiaNoEncontradaException(AlergiaNoEncontradaException ex){
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+    }        
 }
