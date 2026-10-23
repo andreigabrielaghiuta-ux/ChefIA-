@@ -48,5 +48,14 @@ public class AlergiaService {
 
         return new AlergiaRespuestaDTO(alergia.getId(),alergia.getNombre(),alergia.getDescripcion());
     }
+
+    public AlergiaRespuestaDTO eliminarAlergia(Long usuarioId, Long alergiaId){
+        Perfil perfil = perfilRepository.findByUsuarioId(usuarioId).orElseThrow(() -> new PerfilNoEncontradoException(usuarioId));
+        Alergia alergia = alergiaRepository.findById(alergiaId).orElseThrow(() -> new AlergiaNoEncontradaException(alergiaId));
+        perfil.eliminarAlergia(alergia);
+        perfilRepository.save(perfil);
+        return new AlergiaRespuestaDTO(alergia.getId(),alergia.getNombre(),alergia.getDescripcion());
+    }
+    
     
 }
