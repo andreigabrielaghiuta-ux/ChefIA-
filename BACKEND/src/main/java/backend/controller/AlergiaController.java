@@ -7,7 +7,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,27 +18,27 @@ import backend.service.AlergiaService;
 @RequestMapping ("/api/alergias")
 public class AlergiaController {
     private final AlergiaService alergiaService;
-        public AlergiaController(AlergiaService alergiaService){
-            this.alergiaService=alergiaService;
-        }
-        @GetMapping 
-        public List<AlergiaRespuestaDTO> listarAlergias(){
-            return alergiaService.listarAlergias();
-        }
-        @PutMapping("/alergias")
-        public AlergiaRespuestaDTO añadirAlergia(@AuthenticationPrincipal Jwt jwt, @PathVariable Long alergiaId) {
-        Long usuarioId = Long.valueOf(jwt.getSubject());
-        return alergiaService.añadirAlergia(usuarioId, alergiaId);
+    public AlergiaController(AlergiaService alergiaService){
+        this.alergiaService=alergiaService;
     }
-        @DeleteMapping ("/{alergiaId}")
-        public AlergiaRespuestaDTO eleminarAlergia(@AuthenticationPrincipal Jwt jwt, @PathVariable Long alergiaId) {
-        Long usuarioId = Long.valueOf(jwt.getSubject());
-        return alergiaService.eliminarAlergia(usuarioId, alergiaId);
+    @GetMapping 
+    public List<AlergiaRespuestaDTO> listarAlergias(){
+    return alergiaService.listarAlergias();
+    }
+    @PostMapping("/{alergiaId}")
+    public AlergiaRespuestaDTO añadirAlergia(@AuthenticationPrincipal Jwt jwt,@PathVariable Long alergiaId) {
+    Long usuarioId = Long.valueOf(jwt.getSubject());
+    return alergiaService.añadirAlergia(usuarioId, alergiaId);
+    }
+    @DeleteMapping ("/{alergiaId}")
+    public AlergiaRespuestaDTO eleminarAlergia(@AuthenticationPrincipal Jwt jwt, @PathVariable Long alergiaId) {
+    Long usuarioId = Long.valueOf(jwt.getSubject());
+    return alergiaService.eliminarAlergia(usuarioId, alergiaId);
     }  
-        @GetMapping("/mis-alergias")
-        public List<AlergiaRespuestaDTO> listarAlergiasUsuario(@AuthenticationPrincipal Jwt jwt){
-        Long usuarioId = Long.valueOf(jwt.getSubject());
-        return alergiaService.listarAlergiasUsuario(usuarioId);
-        }
+    @GetMapping("/mis-alergias")
+    public List<AlergiaRespuestaDTO> listarAlergiasUsuario(@AuthenticationPrincipal Jwt jwt){
+    Long usuarioId = Long.valueOf(jwt.getSubject());
+    return alergiaService.listarAlergiasUsuario(usuarioId);
+    }
 
 }
