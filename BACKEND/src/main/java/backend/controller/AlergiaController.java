@@ -34,6 +34,11 @@ public class AlergiaController {
         public AlergiaRespuestaDTO eleminarAlergia(@AuthenticationPrincipal Jwt jwt, @PathVariable Long alergiaId) {
         Long usuarioId = Long.valueOf(jwt.getSubject());
         return alergiaService.eliminarAlergia(usuarioId, alergiaId);
-    }
+    }  
+        @GetMapping("/mis-alergias")
+        public List<AlergiaRespuestaDTO> listarAlergiasUsuario(@AuthenticationPrincipal Jwt jwt){
+        Long usuarioId = Long.valueOf(jwt.getSubject());
+        return alergiaService.listarAlergiasUsuario(usuarioId);
+        }
 
 }

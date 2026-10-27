@@ -2,7 +2,7 @@ package backend.service;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Set;
 import org.springframework.stereotype.Service;
 
 import backend.dto.AlergiaRespuestaDTO;
@@ -12,6 +12,7 @@ import backend.exception.AlergiaNoEncontradaException;
 import backend.exception.PerfilNoEncontradoException;
 import backend.repository.AlergiaRepository;
 import backend.repository.PerfilRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service 
 public class AlergiaService {
@@ -56,6 +57,24 @@ public class AlergiaService {
         perfilRepository.save(perfil);
         return new AlergiaRespuestaDTO(alergia.getId(),alergia.getNombre(),alergia.getDescripcion());
     }
+
+    @Transactional(readOnly = true)
+    public List<AlergiaRespuestaDTO> listarAlergiasUsuario(Long usuarioId){
+        Perfil perfil = perfilRepository.findByUsuarioId(usuarioId).orElseThrow(() -> new PerfilNoEncontradoException(usuarioId));
+
+        Set<Alergia> alergias = perfil.getAlergias();
+        List<AlergiaRespuestaDTO> respuesta = new ArrayList<>();
+        for (Alergia alergia : alergias) {
+            AlergiaRespuestaDTO dto = new AlergiaRespuestaDTO(
+                alergia.getId(),
+                alergia.getNombre(),
+                alergia.getDescripcion()
+            );
+
+            respuesta.add(dto);
+        }
+
+        return respuesta;
     
-    
+    }
 }
