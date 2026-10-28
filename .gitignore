@@ -9,3 +9,5 @@ target
 *.db-wal
 *.db-shm
 DATABASE/*.db
+graphify-out/
+CLAUDE.md
